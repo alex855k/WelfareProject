@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <DatePicker HorizontalAlignment="Left" Margin="129,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="From" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ListBox HorizontalAlignment="Left" Height="295" Margin="291,10,0,0" VerticalAlignment="Top" Width="216"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="112" Height="30" Click="Button_Click"/>
+        <ComboBox HorizontalAlignment="Left" Margin="111,41,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Alarm Type" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="111,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.558"/>
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="122,99,0,0" VerticalAlignment="Top" Width="112" Height="30"/>
+
     </Grid>
 </Window>

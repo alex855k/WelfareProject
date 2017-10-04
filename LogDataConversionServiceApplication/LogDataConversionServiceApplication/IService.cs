@@ -17,7 +17,7 @@ namespace LogDataConversionServiceApplication
 
 
 		[OperationContract]
-		List<string[]> ParseLog(List<string[]> value, string Parser);
+		List<string[]> ParseLog2(List<string[]> value, string Parser);
 
 		//[OperationContract]
   //      CompositeType GetDataUsingDataContract(CompositeType composite);

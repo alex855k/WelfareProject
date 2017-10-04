@@ -13,7 +13,8 @@ namespace LogDataConversionServiceApplication
 	{
 		public List<string[]> ParseLog(List<string[]> log)
 		{
-			return this.ParseLog(log, "generic");
+			return this.ParseLog(log, "generic"); // In the future, this should be "smarter" and be able to determine adapter itself.
+			// Or just make the genereic adapter smart and have it work for "everything".
 		}
 
 		public List<string[]> ParseLog(List<string[]> log, string parser)

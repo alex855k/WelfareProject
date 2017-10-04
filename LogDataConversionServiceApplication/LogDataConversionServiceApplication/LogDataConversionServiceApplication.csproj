@@ -65,8 +65,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\GenericAdapter.cs" />
     <Compile Include="ILogFile.cs" />
     <Compile Include="LogAdapter.cs" />
+    <Compile Include="Logfiles\TextLog.cs" />
     <Compile Include="LogParser.cs" />
     <Compile Include="Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
@@ -75,9 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Adapters\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Logfiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

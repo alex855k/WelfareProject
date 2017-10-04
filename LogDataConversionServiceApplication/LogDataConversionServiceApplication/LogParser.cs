@@ -12,11 +12,11 @@ namespace LogDataConversionServiceApplication
 		ILogFile ToParse;
 		LogAdapter Adapter;
 		
-		// Constructor, has factory for the Adapter.
 		public LogParser(ILogFile logfile)
 		{
 			ToParse = logfile;
 
+			// "Factory" for the adapter.
 			switch(ToParse.Parser)
 			{
 				default:
@@ -25,7 +25,5 @@ namespace LogDataConversionServiceApplication
 					break;
 			}
 		}
-
-
 	}
 }

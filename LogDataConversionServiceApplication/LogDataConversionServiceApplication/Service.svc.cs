@@ -12,12 +12,12 @@ namespace LogDataConversionServiceApplication
 	// NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
 	public class Service : IService
 	{
-		public string[] ParseLog(string[] loglines)
+		public string[] ParseLog(object log)
 		{
-			return this.ParseLog(loglines, "generic");
+			return this.ParseLog(log, "generic");
 		}
 
-		public string[] ParseLog(string[] loglines, string parser)
+		public string[] ParseLog(object log, string parser)
 		{
 			throw new NotImplementedException();
 		}

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using LogDataConversionServiceApplication.Logfiles;
 
 namespace LogDataConversionServiceApplication
 {
@@ -12,14 +13,14 @@ namespace LogDataConversionServiceApplication
 	// NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
 	public class Service : IService
 	{
-		public string[] ParseLog(object log)
+		public string[] ParseLog(List<string[]> log)
 		{
 			return this.ParseLog(log, "generic");
 		}
 
-		public string[] ParseLog(object log, string parser)
+		public string[] ParseLog(List<string[]> log, string parser)
 		{
-			throw new NotImplementedException();
+			TextLog Log = new TextLog(log);
 		}
 
 		//public CompositeType GetDataUsingDataContract(CompositeType composite)

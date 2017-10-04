@@ -9,21 +9,21 @@ using System.Text;
 namespace LogDataConversionServiceApplication
 {
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
-	[ServiceContract]
-	public interface IService
-	{
-		[OperationContract]
-		string[] ParseLog(object value);
+ [ServiceContract]
+    public interface IService
+    {
+        [OperationContract]
+        List<string[]> ParseLog(List<string[]> value);
 
 
 		[OperationContract]
-		string[] ParseLog(object value, string Parser);
+		List<string[]> ParseLog(List<string[]> value, string Parser);
 
 		//[OperationContract]
-		//      CompositeType GetDataUsingDataContract(CompositeType composite);
+  //      CompositeType GetDataUsingDataContract(CompositeType composite);
 
-		// TODO: Add your service operations here
-	}
+        // TODO: Add your service operations here
+    }
 
 
 	// Use a data contract as illustrated in the sample below to add composite types to service operations.

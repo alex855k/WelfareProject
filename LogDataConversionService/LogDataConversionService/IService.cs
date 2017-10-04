@@ -12,11 +12,11 @@ namespace LogDataConversionService
     public interface IService
     {
         [OperationContract]
-        string ParseLog(string[] value);
+        string[] ParseLog(string[] value);
 
 
 		[OperationContract]
-		string ParseLog(string[] value, string Parser);
+		string[] ParseLog(string[] value, string Parser);
 
 		//[OperationContract]
   //      CompositeType GetDataUsingDataContract(CompositeType composite);

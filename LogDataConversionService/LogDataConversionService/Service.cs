@@ -10,12 +10,12 @@ namespace LogDataConversionService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service : IService
     {
-        public string ParseLog(string[] loglines)
+        public string[] ParseLog(string[] loglines)
         {
 			return this.ParseLog(loglines, "generic");
         }
 
-		public string ParseLog(string[] loglines, string parser)
+		public string[] ParseLog(string[] loglines, string parser)
 		{
 			throw new NotImplementedException();
 		}

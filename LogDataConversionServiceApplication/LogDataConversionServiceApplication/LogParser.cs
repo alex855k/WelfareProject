@@ -11,6 +11,9 @@ namespace LogDataConversionServiceApplication
 	{
 		ILogFile ToParse;
 		LogAdapter Adapter;
+
+		List<string> ParsedHeaders;
+		List<string[]> ParsedData; 
 		
 		public LogParser(ILogFile logfile)
 		{
@@ -24,6 +27,14 @@ namespace LogDataConversionServiceApplication
 					Adapter = new GenericAdapter(); 
 					break;
 			}
+		}
+
+		public List<string[]> Parse()
+		{
+			ParsedHeaders = Adapter.ParseHeaders(ToParse.GetHeaders());
+			ParsedData = Adapter.ParseData(ToParse.GetData());
+
+
 		}
 	}
 }

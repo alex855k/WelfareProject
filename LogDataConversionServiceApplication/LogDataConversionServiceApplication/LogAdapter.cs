@@ -7,5 +7,7 @@ namespace LogDataConversionServiceApplication
 {
 	public abstract class LogAdapter
 	{
+		public abstract List<string> ParseHeader(List<string> Headers);
+		public abstract List<string[]> ParseData(List<string> Data);
 	}
 }

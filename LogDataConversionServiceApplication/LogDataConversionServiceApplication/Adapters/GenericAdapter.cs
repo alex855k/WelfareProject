@@ -7,7 +7,7 @@ namespace LogDataConversionServiceApplication.Adapters
 {
 	public class GenericAdapter : LogAdapter
 	{
-		public override List<string[]> ParseData(List<string> Data)
+		public override List<string[]> ParseData(List<string[]> Data)
 		{
 			throw new NotImplementedException();
 		}

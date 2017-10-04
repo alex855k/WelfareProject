@@ -31,9 +31,21 @@ namespace LogDataConversionServiceApplication
 
 		public List<string[]> Parse()
 		{
+			List<string[]> ToReturn = new List<string[]>();
+
 			ParsedHeaders = Adapter.ParseHeaders(ToParse.GetHeaders());
 			ParsedData = Adapter.ParseData(ToParse.GetData());
 
+			string[] PHarray = ParsedHeaders.ToArray<string>();
+
+			ToReturn.Add(PHarray);
+			
+			foreach(string[] line in ParsedData)
+			{
+				ToReturn.Add(line);
+			}
+
+			return ToReturn;
 
 		}
 	}

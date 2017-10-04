@@ -12,7 +12,7 @@ namespace LogDataConversionServiceApplication.Adapters
 			throw new NotImplementedException();
 		}
 
-		public override List<string> ParseHeader(List<string> Headers)
+		public override List<string> ParseHeaders(List<string> Headers)
 		{
 			throw new NotImplementedException();
 		}

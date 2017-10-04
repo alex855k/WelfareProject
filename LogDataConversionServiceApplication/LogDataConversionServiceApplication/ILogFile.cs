@@ -7,5 +7,9 @@ namespace LogDataConversionServiceApplication
 {
 	public interface ILogFile
 	{
+		string Parser { get; }
+
+		List<string> GetHeaders();
+		List<string[]> GetData();
 	}
 }

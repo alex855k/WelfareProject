@@ -7,5 +7,6 @@ namespace LogDataConversionServiceApplication
 {
 	public class LogParser
 	{
+		ILogFile ToParse;
 	}
 }

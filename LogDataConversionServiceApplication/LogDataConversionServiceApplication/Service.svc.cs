@@ -13,14 +13,17 @@ namespace LogDataConversionServiceApplication
 	// NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
 	public class Service : IService
 	{
-		public string[] ParseLog(List<string[]> log)
+		public List<string[]> ParseLog(List<string[]> log)
 		{
 			return this.ParseLog(log, "generic");
 		}
 
-		public string[] ParseLog(List<string[]> log, string parser)
+		public List<string[]> ParseLog(List<string[]> log, string parser)
 		{
 			TextLog Log = new TextLog(log);
+			LogParser Parser = new LogParser(Log);
+
+			return Parser.Parse();
 		}
 
 		//public CompositeType GetDataUsingDataContract(CompositeType composite)

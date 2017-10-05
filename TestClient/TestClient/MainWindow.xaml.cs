@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestClient.LogConverterService;
 
 namespace TestClient
 {
@@ -20,7 +21,7 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
+		ServiceClient LC = new ServiceClient();
 		public MainWindow()
 		{
 			InitializeComponent();

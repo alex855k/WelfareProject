@@ -9,7 +9,19 @@
 //------------------------------------------------------------------------------
 
 namespace TestClient.LogConverterService {
+    using System.Runtime.Serialization;
     
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AlarmType", Namespace="http://schemas.datacontract.org/2004/07/LogDataConversionServiceApplication")]
+    public enum AlarmType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DoorOpen = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BedSensor = 1,
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LogConverterService.IService")]
@@ -26,6 +38,12 @@ namespace TestClient.LogConverterService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
         System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[][] value, string Parser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/TestMethod", ReplyAction="http://tempuri.org/IService/TestMethodResponse")]
+        TestClient.LogConverterService.AlarmType TestMethod();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/TestMethod", ReplyAction="http://tempuri.org/IService/TestMethodResponse")]
+        System.Threading.Tasks.Task<TestClient.LogConverterService.AlarmType> TestMethodAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +87,14 @@ namespace TestClient.LogConverterService {
         
         public System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[][] value, string Parser) {
             return base.Channel.ParseLog2Async(value, Parser);
+        }
+        
+        public TestClient.LogConverterService.AlarmType TestMethod() {
+            return base.Channel.TestMethod();
+        }
+        
+        public System.Threading.Tasks.Task<TestClient.LogConverterService.AlarmType> TestMethodAsync() {
+            return base.Channel.TestMethodAsync();
         }
     }
 }

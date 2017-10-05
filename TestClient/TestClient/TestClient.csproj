@@ -102,6 +102,12 @@
     <None Include="Connected Services\LogConverterService\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\LogConverterService\Service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LogConverterService\TestClient.LogConverterService.AlarmType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

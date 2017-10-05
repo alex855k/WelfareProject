@@ -20,6 +20,7 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
 		public MainWindow()
 		{
 			InitializeComponent();

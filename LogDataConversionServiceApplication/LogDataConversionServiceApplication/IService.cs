@@ -30,9 +30,9 @@ namespace LogDataConversionServiceApplication
 	[DataContract(Name = "AlarmType")]
 	public enum AlarmType
 	{
-		[DataMember]
+		[EnumMemberAttribute]
 		DoorOpen,
-		[DataMember]
+		[EnumMemberAttribute]
 		BedSensor
 	}
 

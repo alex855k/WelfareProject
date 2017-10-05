@@ -11,7 +11,7 @@
         <Label Content="From" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ListBox HorizontalAlignment="Left" Height="295" Margin="291,10,0,0" VerticalAlignment="Top" Width="216"/>
         <Button Content="Start" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="112" Height="30" Click="Button_Click"/>
-        <ComboBox HorizontalAlignment="Left" Margin="111,41,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="Alarms" HorizontalAlignment="Left" Margin="111,41,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Alarms_SelectionChanged"/>
         <Label Content="Alarm Type" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="111,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.558"/>

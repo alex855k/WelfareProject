@@ -25,9 +25,13 @@ namespace LogDataConversionServiceApplication
 			return Parser.Parse();
 		}
 
-		public AlarmType TestMethod()
+		public List<string> GetAlarmTypes()
 		{
-			return AlarmType.BedSensor;
+			var AlarmTypes = new List<string>();
+			AlarmTypes.Add("Door Open");
+			AlarmTypes.Add("Bed Sensor");
+
+			return AlarmTypes;
 		}
 
 		//public CompositeType GetDataUsingDataContract(CompositeType composite)

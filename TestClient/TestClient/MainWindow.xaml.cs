@@ -25,9 +25,15 @@ namespace TestClient
 		public MainWindow()
 		{
 			InitializeComponent();
+			Alarms.Items.Add("Test");
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void Alarms_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 
 		}

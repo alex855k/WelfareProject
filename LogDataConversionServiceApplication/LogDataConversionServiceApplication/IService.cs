@@ -22,22 +22,13 @@ namespace LogDataConversionServiceApplication
 		List<string[]> ParseLog2(List<string[]> value, string Parser);
 
 		[OperationContract]
-		AlarmType TestMethod();
+		List<string> GetAlarmTypes();
 
 		//[OperationContract]
   //      CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here
     }
-
-	[DataContract(Name = "AlarmType")]
-	public enum AlarmType
-	{
-		[EnumMemberAttribute]
-		DoorOpen,
-		[EnumMemberAttribute]
-		BedSensor
-	}
 
 	// Use a data contract as illustrated in the sample below to add composite types to service operations.
 	//[DataContract]

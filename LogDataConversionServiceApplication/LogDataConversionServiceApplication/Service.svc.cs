@@ -25,6 +25,11 @@ namespace LogDataConversionServiceApplication
 			return Parser.Parse();
 		}
 
+		public AlarmType TestMethod()
+		{
+			return AlarmType.BedSensor;
+		}
+
 		//public CompositeType GetDataUsingDataContract(CompositeType composite)
 		//{
 		//    if (composite == null)

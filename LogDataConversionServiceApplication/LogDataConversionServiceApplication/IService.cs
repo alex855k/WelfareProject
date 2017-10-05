@@ -21,6 +21,9 @@ namespace LogDataConversionServiceApplication
 		[OperationContract]
 		List<string[]> ParseLog2(List<string[]> value, string Parser);
 
+		[OperationContract]
+		AlarmType TestMethod();
+
 		//[OperationContract]
   //      CompositeType GetDataUsingDataContract(CompositeType composite);
 
@@ -61,8 +64,8 @@ namespace LogDataConversionServiceApplication
 	{
 		public static IEnumerable<Type> GetKnownTypes(ICustomAttributeProvider provider)
 		{
-			System.Collections.Generic.List<System.Type> knownTypes =
-				new System.Collections.Generic.List<System.Type>();
+			List<Type> knownTypes =
+				new List<Type>();
 			// Add any types to include here.
 			knownTypes.Add(typeof(AlarmType));
 			return knownTypes;

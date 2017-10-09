@@ -11,23 +11,23 @@ namespace LogDataConversionServiceApplication
 {
 	public class Service : IService
 	{
-		public void LoadFromFile(string[] log)
+		public List<string> ParseFromFile(string[] log)
 		{
-			this.LoadFromFileCustomParser(log, "generic"); // In the future, this should be "smarter" and be able to determine adapter itself.
+			return this.ParseFromFileCustom(log, "generic"); // In the future, this should be "smarter" and be able to determine adapter itself.
 			// Or just make the genereic adapter smart and have it work for "everything".
 		}
 
-		public void LoadFromFileCustomParser(string[] log, string parser)
+		public List<string> ParseFromFileCustom(string[] log, string parser)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void LoadFromURI(string uri)
+		public List<string> ParseFromURI(string uri)
 		{
-			this.LoadFromURICustomParser(uri, "generic");
+			return this.ParseFromURICustom(uri, "generic");
 		}
 
-		public void LoadFromURICustomParser(string uri, string parser)
+		public List<string> ParseFromURICustom(string uri, string parser)
 		{
 			throw new NotImplementedException();
 		}

@@ -18,12 +18,12 @@ namespace LogDataConversionServiceApplication.Adapters
 
 		public override List<string[]> ParseData(List<string[]> Data)
 		{
-			throw new NotImplementedException();
+			return Data;
 		}
 
 		public override List<string> ParseHeaders(List<string> Headers)
 		{
-			throw new NotImplementedException();
+			return Headers;
 		}
 	}
 }

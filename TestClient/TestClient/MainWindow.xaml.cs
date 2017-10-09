@@ -53,5 +53,11 @@ namespace TestClient
 				lbl_Warning.Content = "";
 			}
 		}
+
+		private void StartService_Click(object sender, RoutedEventArgs e)
+		{
+			string[] file = System.IO.File.ReadAllLines(LogFilePath);
+			LC.ParseLog(file);
+		}
 	}
 }

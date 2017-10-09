@@ -15,11 +15,11 @@ namespace LogDataConversionServiceApplication
     {
 		[ServiceKnownType("GetKnownTypes", typeof(Helper))]
 		[OperationContract]
-        List<string[]> ParseLog(List<string[]> value);
+        List<string[]> ParseLog(string[] value);
 
 
 		[OperationContract]
-		List<string[]> ParseLog2(List<string[]> value, string Parser);
+		List<string[]> ParseLog2(string[] value, string Parser);
 
 		//[OperationContract]
   //      CompositeType GetDataUsingDataContract(CompositeType composite);

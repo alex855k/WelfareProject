@@ -11,13 +11,13 @@ namespace LogDataConversionServiceApplication
 {
 	public class Service : IService
 	{
-		public List<string[]> ParseLog(List<string[]> log)
+		public List<string[]> ParseLog(string[] log)
 		{
 			return this.ParseLog2(log, "generic"); // In the future, this should be "smarter" and be able to determine adapter itself.
 			// Or just make the genereic adapter smart and have it work for "everything".
 		}
 
-		public List<string[]> ParseLog2(List<string[]> log, string parser)
+		public List<string[]> ParseLog2(string[] log, string parser)
 		{
 			TextLog Log = new TextLog(log);
 			LogParser Parser = new LogParser(Log);

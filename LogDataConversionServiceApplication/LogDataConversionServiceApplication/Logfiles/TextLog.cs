@@ -7,7 +7,7 @@ namespace LogDataConversionServiceApplication.Logfiles
 {
 	public class TextLog : ILogFile
 	{
-		public TextLog(List<string[]> log)
+		public TextLog(string[] log)
 		{
 			this.Data = log;
 		}

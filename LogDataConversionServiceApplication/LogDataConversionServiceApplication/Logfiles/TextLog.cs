@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace LogDataConversionServiceApplication.Logfiles
 {
 	public class TextLog : ILogFile
 	{
+		private List<Char> Seperators = new List<Char> { '\t' };
 		public TextLog(string[] log)
 		{
 			this.Data = log;
@@ -26,8 +28,9 @@ namespace LogDataConversionServiceApplication.Logfiles
 
 		public List<string> GetHeaders()
 		{
-			throw new NotImplementedException();
-			//return Data[0].ToList<string>();
+			string Headers = Data[0];
+
+			return Headers.Split(Seperators.ToArray()).ToList<string>(); // Split the headers by the seperators, and put it to a list
 		}
 	}
 }

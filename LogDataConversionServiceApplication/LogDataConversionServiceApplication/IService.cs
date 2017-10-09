@@ -16,7 +16,6 @@ namespace LogDataConversionServiceApplication
 		[OperationContract]
         List<string> ParseFromFile(string[] value);
 
-
 		[OperationContract]
 		List<string> ParseFromFileCustom(string[] value, string parser);
 

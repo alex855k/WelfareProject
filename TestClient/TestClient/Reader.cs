@@ -5,9 +5,11 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Web;
+using System.Windows;
 
-namespace LogDataConversionServiceApplication
+namespace TestClient
 {
+
     public enum FileLocation
     {
         Local,URI
@@ -15,26 +17,43 @@ namespace LogDataConversionServiceApplication
 
     public class Reader
     {
-        private FileLocation _fileLocation;
+        //The responsibility of this class is to read the data and return only the data that is nessecary as a string array.
+        private FileLocation _fileLocationType;
         private string _filePath;
         private string _read;
-        private bool _running; 
-        public Reader()
-        {
+        private bool _running;
 
+        public string LocalDirectory { get; set; }
+
+        public Reader(string localDirectory)
+        {
+            LocalDirectory = localDirectory;
         }
 
-        public void ReadFile()
+        public void ChangeFilePath()
+        {
+            
+        }
+
+        public string[] GetNewData()
         {
             // If file location is still remote fetch a copy and store it locally and set the filepath
-            if (_fileLocation == FileLocation.URI) CopyFileToLocal();
+            if (_fileLocationType == FileLocation.URI) CopyFileToLocalDirectory();
 
             if (_filePath != null)
             {
-                while (_running)
+                string[] data = File.ReadAllLines(_filePath, Encoding.GetEncoding("iso-8859-1"));
+
+                foreach (var l in data)
                 {
-                
+                    string[] arr = l.Split('\t');
+                    if (arr) { }
                 }
+
+
+                return data; 
+
+                //Thread t = new Thread();
             }
             else
             {
@@ -42,15 +61,20 @@ namespace LogDataConversionServiceApplication
             }
         }
 
-        private void CopyFileToLocal()
+        private void SendData()
         {
+            while (_running)
+            {
+
+            }
+        }
+
+        private void CopyFileToLocalDirectory()
+        {
+            throw new NotImplementedException();
             // Implement this yourselves
         }
 
-        private void ReadData(string[][] file)
-        {   
-
-        }
 
 
         public void StopReader()

@@ -57,7 +57,7 @@ namespace TestClient
 		private void StartService_Click(object sender, RoutedEventArgs e)
 		{
 			string[] file = System.IO.File.ReadAllLines(LogFilePath);
-			string[][] ParsedLog = LC.ParseLog(file);
+			var ParsedLog = LC.ParseLog(file);
 			
 			foreach(string[] line in ParsedLog)
 			{

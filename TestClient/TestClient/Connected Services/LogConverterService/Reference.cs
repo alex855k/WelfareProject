@@ -15,17 +15,17 @@ namespace TestClient.LogConverterService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LogConverterService.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        string[][] ParseLog(string[] value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogDefaultParser", ReplyAction="http://tempuri.org/IService/ParseLogDefaultParserResponse")]
+        string[][] ParseLogDefaultParser(string[] value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogDefaultParser", ReplyAction="http://tempuri.org/IService/ParseLogDefaultParserResponse")]
+        System.Threading.Tasks.Task<string[][]> ParseLogDefaultParserAsync(string[] value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
-        string[][] ParseLog2(string[] value, string Parser);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustomParser", ReplyAction="http://tempuri.org/IService/ParseLogCustomParserResponse")]
+        string[][] ParseLogCustomParser(string[] value, string Parser);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
-        System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[] value, string Parser);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustomParser", ReplyAction="http://tempuri.org/IService/ParseLogCustomParserResponse")]
+        System.Threading.Tasks.Task<string[][]> ParseLogCustomParserAsync(string[] value, string Parser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlarms", ReplyAction="http://tempuri.org/IService/GetAlarmsResponse")]
         string[] GetAlarms();
@@ -61,20 +61,20 @@ namespace TestClient.LogConverterService {
                 base(binding, remoteAddress) {
         }
         
-        public string[][] ParseLog(string[] value) {
-            return base.Channel.ParseLog(value);
+        public string[][] ParseLogDefaultParser(string[] value) {
+            return base.Channel.ParseLogDefaultParser(value);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value) {
-            return base.Channel.ParseLogAsync(value);
+        public System.Threading.Tasks.Task<string[][]> ParseLogDefaultParserAsync(string[] value) {
+            return base.Channel.ParseLogDefaultParserAsync(value);
         }
         
-        public string[][] ParseLog2(string[] value, string Parser) {
-            return base.Channel.ParseLog2(value, Parser);
+        public string[][] ParseLogCustomParser(string[] value, string Parser) {
+            return base.Channel.ParseLogCustomParser(value, Parser);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[] value, string Parser) {
-            return base.Channel.ParseLog2Async(value, Parser);
+        public System.Threading.Tasks.Task<string[][]> ParseLogCustomParserAsync(string[] value, string Parser) {
+            return base.Channel.ParseLogCustomParserAsync(value, Parser);
         }
         
         public string[] GetAlarms() {

@@ -13,12 +13,12 @@ namespace LogDataConversionServiceApplication
  [ServiceContract]
     public interface IService
     {
-		[OperationContract(Name="ParseLogDefaultParser")]
+		[OperationContract]
         List<string[]> ParseLog(string[] value);
 
 
-		[OperationContract(Name="ParseLogCustomParser")]
-		List<string[]> ParseLog(string[] value, string Parser);
+		[OperationContract]
+		List<string[]> ParseLogCustom(string[] value, string Parser);
 
 		[OperationContract]
 		List<string> GetAlarms();

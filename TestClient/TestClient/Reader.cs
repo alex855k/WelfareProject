@@ -20,7 +20,6 @@ namespace TestClient
         private FileLocation _fileLocationType;
 
         public string FilePath => FileDirectory + FileName;
-
         public string FileName { get; }
         private string[] _dataFile;
         private bool _hasHeader = true;
@@ -63,10 +62,11 @@ namespace TestClient
             {
                 // For every line of data split the data into columns
                 string[] columns = line.Split(seperationChar);
-                // If it's line one try to find the column where the date is located
+                
                     for (int columnCount = 0; columnCount < columns.Length; columnCount++)
                     {
-                        Match m = _dateRegex.Match(columns[columnCount]);
+                        // If it's finding a date column index 0 it must mean it has no headers
+                         Match m = _dateRegex.Match(columns[columnCount]);
                         if (m.Success)
                         {
                             if (countLines == 0) _hasHeader = false;
@@ -74,7 +74,7 @@ namespace TestClient
                         }
                     }
                 }
-            return 0;
+            return -1;
         }
 
         public char GetSeperationChar(string[] data)

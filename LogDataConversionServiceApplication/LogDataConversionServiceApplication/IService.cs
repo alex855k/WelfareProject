@@ -14,10 +14,10 @@ namespace LogDataConversionServiceApplication
     public interface IService
     {  
         [OperationContract]
-        List<string[]> ParseFromFile(string[] value);
+       string[][] ParseFromFile(string[] value);
 
         [OperationContract]
-		List<string[]> ParseFromFileCustom(string[] value, string parser);
+		string[][] ParseFromFileCustom(string[] value, string parser);
 
 		[OperationContract]
 		List<string[]> ParseFromURI(string uri);

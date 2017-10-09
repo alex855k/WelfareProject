@@ -12,19 +12,19 @@ namespace LogDataConversionServiceApplication
 {
 	public class Service : IService
 	{
-		public List<string[]> ParseFromFile(string[] log)
+		public string[][] ParseFromFile(string[] log)
 		{
 			return this.ParseFromFileCustom(log, "generic"); // In the future, this should be "smarter" and be able to determine adapter itself.
 			// Or just make the genereic adapter smart and have it work for "everything".
 		}
 
-		public List<string[]> ParseFromFileCustom(string[] log, string parser)
+		public string[][] ParseFromFileCustom(string[] log, string parser)
 		{
 			TextLog LogFile = new TextLog(log);
 			LogFile.Parser = parser;
 			LogParser LogParser = new LogParser(LogFile);
 
-			return LogParser.TryParse();
+			return LogParser.TryParse().ToArray();
 		}
 
 		public List<string[]> ParseFromURI(string uri)

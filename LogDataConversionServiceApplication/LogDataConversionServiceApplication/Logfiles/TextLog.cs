@@ -19,11 +19,18 @@ namespace LogDataConversionServiceApplication.Logfiles
 
 		public List<string[]> GetData()
 		{
-			//List<string[]> ToReturn = Data.ToList<string[]>();
-			//ToReturn.RemoveAt(0); // Remove the headers.
+			List<string> DataList = Data.ToList<string>();
+			DataList.RemoveAt(0); // Remove the headers.
 
-			//return ToReturn;
-			throw new NotImplementedException();
+			List<string[]> ToReturn = new List<string[]>();
+
+			foreach(string Line in DataList)
+			{
+				string[] ArrLine = Line.Split(Seperators.ToArray());
+				ToReturn.Add(ArrLine);
+			}
+
+			return ToReturn;
 		}
 
 		public List<string> GetHeaders()

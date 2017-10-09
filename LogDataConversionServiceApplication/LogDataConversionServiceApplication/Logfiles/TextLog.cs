@@ -12,20 +12,22 @@ namespace LogDataConversionServiceApplication.Logfiles
 			this.Data = log;
 		}
 
-		private List<string[]> Data;
+		private string[] Data;
 		public string Parser { get; set; }
 
 		public List<string[]> GetData()
 		{
-			List<string[]> ToReturn = Data.ToList<string[]>();
-			ToReturn.RemoveAt(0); // Remove the headers.
+			//List<string[]> ToReturn = Data.ToList<string[]>();
+			//ToReturn.RemoveAt(0); // Remove the headers.
 
-			return ToReturn;
+			//return ToReturn;
+			throw new NotImplementedException();
 		}
 
 		public List<string> GetHeaders()
 		{
-			return Data[0].ToList<string>();
+			throw new NotImplementedException();
+			//return Data[0].ToList<string>();
 		}
 	}
 }

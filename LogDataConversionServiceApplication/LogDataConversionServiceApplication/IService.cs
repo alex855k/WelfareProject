@@ -13,9 +13,10 @@ namespace LogDataConversionServiceApplication
  [ServiceContract]
     public interface IService
     {
+        //Service operation that used for parsing data from log 
 		[OperationContract]
         List<string> ParseFromFile(string[] value);
-
+        // Custom means that you want to use a custom adapter
 		[OperationContract]
 		List<string> ParseFromFileCustom(string[] value, string parser);
 

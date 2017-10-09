@@ -20,15 +20,38 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		string LogFilePath;
 		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
 		public MainWindow()
 		{
 			InitializeComponent();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void LogFile_Click(object sender, RoutedEventArgs e)
 		{
+			// Create OpenFileDialog 
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
+
+
+			// Set filter for file extension and default file extension 
+			dlg.DefaultExt = ".txt";
+			dlg.Filter = "TXT Files (*.txt)|*.txt";
+
+
+			// Display OpenFileDialog by calling ShowDialog method 
+			Nullable<bool> result = dlg.ShowDialog();
+
+
+			// Get the selected file name and display in a TextBox 
+			if (result == true)
+			{
+				// Open document 
+				string filename = dlg.FileName;
+				LogFilePath = filename;
+				StartService.IsEnabled = true;
+				lbl_Warning.Content = "";
+			}
 		}
 	}
 }

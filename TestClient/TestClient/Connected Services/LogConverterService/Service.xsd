@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:element name="ParseLogDefaultParser">
+  <xs:element name="ParseLog">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="value" nillable="true" type="q1:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ParseLogDefaultParserResponse">
+  <xs:element name="ParseLogResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ParseLogDefaultParserResult" nillable="true" type="q2:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ParseLogResult" nillable="true" type="q2:ArrayOfArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ParseLogCustomParser">
+  <xs:element name="ParseLogCustom">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="value" nillable="true" type="q3:ArrayOfstring" />
@@ -23,10 +23,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ParseLogCustomParserResponse">
+  <xs:element name="ParseLogCustomResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ParseLogCustomParserResult" nillable="true" type="q4:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ParseLogCustomResult" nillable="true" type="q4:ArrayOfArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

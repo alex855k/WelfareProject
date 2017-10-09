@@ -67,11 +67,9 @@
   <ItemGroup>
     <Compile Include="Adapters\GenericAdapter.cs" />
     <Compile Include="ILogFile.cs" />
-    <Compile Include="IReader.cs" />
     <Compile Include="LogAdapter.cs" />
     <Compile Include="Logfiles\TextLog.cs" />
     <Compile Include="LogParser.cs" />
-    <Compile Include="Reader.cs" />
     <Compile Include="Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
     </Compile>

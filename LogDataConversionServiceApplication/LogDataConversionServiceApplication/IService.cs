@@ -12,19 +12,18 @@ namespace LogDataConversionServiceApplication
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
  [ServiceContract]
     public interface IService
-    {
-        //Service operation that used for parsing data from log 
-		[OperationContract]
-        List<string> ParseFromFile(string[] value);
-        // Custom means that you want to use a custom adapter
-		[OperationContract]
-		List<string> ParseFromFileCustom(string[] value, string parser);
+    {  
+        [OperationContract]
+        List<string[]> ParseFromFile(string[] value);
+
+        [OperationContract]
+		List<string[]> ParseFromFileCustom(string[] value, string parser);
 
 		[OperationContract]
-		List<string> ParseFromURI(string uri);
+		List<string[]> ParseFromURI(string uri);
 
 		[OperationContract]
-		List<string> ParseFromURICustom(string uri, string parser);
+		List<string[]> ParseFromURICustom(string uri, string parser);
 
 		[OperationContract]
 		List<string> GetAlarms();

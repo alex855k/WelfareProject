@@ -44,6 +44,12 @@
   <wsdl:message name="IService_ParseLog2_OutputMessage">
     <wsdl:part name="parameters" element="tns:ParseLog2Response" />
   </wsdl:message>
+  <wsdl:message name="IService_GetAlarms_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarms" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarmsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="ParseLog">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseLog" message="tns:IService_ParseLog_InputMessage" />
@@ -52,6 +58,10 @@
     <wsdl:operation name="ParseLog2">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseLog2" message="tns:IService_ParseLog2_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/ParseLog2Response" message="tns:IService_ParseLog2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAlarms" message="tns:IService_GetAlarms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetAlarmsResponse" message="tns:IService_GetAlarms_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -74,6 +84,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAlarms">
+      <soap:operation soapAction="http://tempuri.org/IService/GetAlarms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpsBinding_IService" type="tns:IService">
     <wsp:PolicyReference URI="#BasicHttpsBinding_IService_policy" />
@@ -89,6 +108,15 @@
     </wsdl:operation>
     <wsdl:operation name="ParseLog2">
       <soap:operation soapAction="http://tempuri.org/IService/ParseLog2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarms">
+      <soap:operation soapAction="http://tempuri.org/IService/GetAlarms" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

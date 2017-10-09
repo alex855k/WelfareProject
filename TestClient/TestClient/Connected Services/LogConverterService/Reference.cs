@@ -16,16 +16,22 @@ namespace TestClient.LogConverterService {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        string[][] ParseLog(string[][] value);
+        string[][] ParseLog(string[] value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[][] value);
+        System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
-        string[][] ParseLog2(string[][] value, string Parser);
+        string[][] ParseLog2(string[] value, string Parser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
-        System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[][] value, string Parser);
+        System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[] value, string Parser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlarms", ReplyAction="http://tempuri.org/IService/GetAlarmsResponse")]
+        string[] GetAlarms();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlarms", ReplyAction="http://tempuri.org/IService/GetAlarmsResponse")]
+        System.Threading.Tasks.Task<string[]> GetAlarmsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,20 +61,28 @@ namespace TestClient.LogConverterService {
                 base(binding, remoteAddress) {
         }
         
-        public string[][] ParseLog(string[][] value) {
+        public string[][] ParseLog(string[] value) {
             return base.Channel.ParseLog(value);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[][] value) {
+        public System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value) {
             return base.Channel.ParseLogAsync(value);
         }
         
-        public string[][] ParseLog2(string[][] value, string Parser) {
+        public string[][] ParseLog2(string[] value, string Parser) {
             return base.Channel.ParseLog2(value, Parser);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[][] value, string Parser) {
+        public System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[] value, string Parser) {
             return base.Channel.ParseLog2Async(value, Parser);
+        }
+        
+        public string[] GetAlarms() {
+            return base.Channel.GetAlarms();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetAlarmsAsync() {
+            return base.Channel.GetAlarmsAsync();
         }
     }
 }

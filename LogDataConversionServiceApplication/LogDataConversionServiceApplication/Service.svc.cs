@@ -25,6 +25,11 @@ namespace LogDataConversionServiceApplication
 			return Parser.Parse();
 		}
 
+		public List<string> GetAlarms()
+		{
+			return new List<string> { "Door Open", "Bed Sensor" };
+		}
+
 		//public CompositeType GetDataUsingDataContract(CompositeType composite)
 		//{
 		//    if (composite == null)

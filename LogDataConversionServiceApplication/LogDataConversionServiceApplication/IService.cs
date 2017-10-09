@@ -13,7 +13,6 @@ namespace LogDataConversionServiceApplication
  [ServiceContract]
     public interface IService
     {
-		[ServiceKnownType("GetKnownTypes", typeof(Helper))]
 		[OperationContract]
         List<string[]> ParseLog(string[] value);
 
@@ -21,20 +20,14 @@ namespace LogDataConversionServiceApplication
 		[OperationContract]
 		List<string[]> ParseLog2(string[] value, string Parser);
 
+		[OperationContract]
+		List<string> GetAlarms();
+
 		//[OperationContract]
   //      CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here
     }
-
-	[DataContract(Name = "AlarmType")]
-	public enum AlarmType
-	{
-		[DataMember]
-		DoorOpen,
-		[DataMember]
-		BedSensor
-	}
 
 	// Use a data contract as illustrated in the sample below to add composite types to service operations.
 	//[DataContract]
@@ -55,17 +48,4 @@ namespace LogDataConversionServiceApplication
 	//		set { stringValue = value; }
 	//	}
 	//}
-
-	// This class has the method named GetKnownTypes that returns a generic IEnumerable.
-	static class Helper
-	{
-		public static IEnumerable<Type> GetKnownTypes(ICustomAttributeProvider provider)
-		{
-			System.Collections.Generic.List<System.Type> knownTypes =
-				new System.Collections.Generic.List<System.Type>();
-			// Add any types to include here.
-			knownTypes.Add(typeof(AlarmType));
-			return knownTypes;
-		}
-	}
 }

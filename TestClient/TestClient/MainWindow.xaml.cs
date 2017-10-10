@@ -22,11 +22,15 @@ namespace TestClient
 	public partial class MainWindow : Window
 	{
 		string LogFilePath;
-		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
+		ServiceClient LC = new ServiceClient();
 		public MainWindow()
 		{
 			InitializeComponent();
-			Alarms.Items.Add("Test");
+			foreach(string alarm in LC.GetAlarms())
+			{
+				Alarms.Items.Add(alarm);
+			}
+
 		}
 
 		private void LogFile_Click(object sender, RoutedEventArgs e)
@@ -59,11 +63,11 @@ namespace TestClient
 		private void StartService_Click(object sender, RoutedEventArgs e)
 		{
 			string[] file = System.IO.File.ReadAllLines(LogFilePath);
-			var ParsedLog = LC.ParseLog(file);
+			var ParsedLog = LC.ParseFromFile(file);
 			
 			foreach(string[] line in ParsedLog)
 			{
-				lstBx_Alarms.Items.Add(line.ToString());
+				lstBx_Alarms.Items.Add(string.Join(" ", line));
 			}
 		}
 

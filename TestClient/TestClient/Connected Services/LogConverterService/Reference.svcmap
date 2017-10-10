@@ -23,11 +23,10 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="3c6bbc23-a155-4c3a-b007-03a7d71c30dc" SourceId="1" SourceUrl="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="b56caed3-7706-4000-a3cb-bd0f7a263270" SourceId="1" SourceUrl="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd1" />
     <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="9c4d24a2-1171-4ac8-b725-3d59c507eb49" SourceId="1" SourceUrl="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd2" />
     <MetadataFile FileName="Service.disco" MetadataType="Disco" ID="b5cf602d-137d-4f6d-8a8e-0b1eb0c9e95e" SourceId="1" SourceUrl="http://eal-welfaceproject.azurewebsites.net/Service.svc?disco" />
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="b56caed3-7706-4000-a3cb-bd0f7a263270" SourceId="1" SourceUrl="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd1" />
     <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="33935747-6419-4e76-b7c4-ef1e73cb9f68" SourceId="1" SourceUrl="http://eal-welfaceproject.azurewebsites.net/Service.svc?wsdl" />
-    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="4407e03b-976d-4148-95cb-19f501f916fc" SourceId="1" SourceUrl="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

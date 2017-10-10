@@ -27,23 +27,34 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd2" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/LogDataConversionServiceApplication" />
-      <xsd:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://eal-welfaceproject.azurewebsites.net/Service.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IService_ParseLog_InputMessage">
-    <wsdl:part name="parameters" element="tns:ParseLog" />
+  <wsdl:message name="IService_ParseFromFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromFile" />
   </wsdl:message>
-  <wsdl:message name="IService_ParseLog_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ParseLogResponse" />
+  <wsdl:message name="IService_ParseFromFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromFileResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_ParseLogCustom_InputMessage">
-    <wsdl:part name="parameters" element="tns:ParseLogCustom" />
+  <wsdl:message name="IService_ParseFromFileCustom_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromFileCustom" />
   </wsdl:message>
-  <wsdl:message name="IService_ParseLogCustom_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ParseLogCustomResponse" />
+  <wsdl:message name="IService_ParseFromFileCustom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromFileCustomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ParseFromURI_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromURI" />
+  </wsdl:message>
+  <wsdl:message name="IService_ParseFromURI_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromURIResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ParseFromURICustom_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromURICustom" />
+  </wsdl:message>
+  <wsdl:message name="IService_ParseFromURICustom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParseFromURICustomResponse" />
   </wsdl:message>
   <wsdl:message name="IService_GetAlarms_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAlarms" />
@@ -51,34 +62,32 @@
   <wsdl:message name="IService_GetAlarms_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAlarmsResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_TestMethod_InputMessage">
-    <wsdl:part name="parameters" element="tns:TestMethod" />
-  </wsdl:message>
-  <wsdl:message name="IService_TestMethod_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TestMethodResponse" />
-  </wsdl:message>
   <wsdl:portType name="IService">
-    <wsdl:operation name="ParseLog">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseLog" message="tns:IService_ParseLog_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/ParseLogResponse" message="tns:IService_ParseLog_OutputMessage" />
+    <wsdl:operation name="ParseFromFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseFromFile" message="tns:IService_ParseFromFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ParseFromFileResponse" message="tns:IService_ParseFromFile_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ParseLogCustom">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseLogCustom" message="tns:IService_ParseLogCustom_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/ParseLogCustomResponse" message="tns:IService_ParseLogCustom_OutputMessage" />
+    <wsdl:operation name="ParseFromFileCustom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseFromFileCustom" message="tns:IService_ParseFromFileCustom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ParseFromFileCustomResponse" message="tns:IService_ParseFromFileCustom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ParseFromURI">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseFromURI" message="tns:IService_ParseFromURI_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ParseFromURIResponse" message="tns:IService_ParseFromURI_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ParseFromURICustom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ParseFromURICustom" message="tns:IService_ParseFromURICustom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ParseFromURICustomResponse" message="tns:IService_ParseFromURICustom_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAlarms">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAlarms" message="tns:IService_GetAlarms_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetAlarmsResponse" message="tns:IService_GetAlarms_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="TestMethod">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/TestMethod" message="tns:IService_TestMethod_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/TestMethodResponse" message="tns:IService_TestMethod_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ParseLog">
-      <soap:operation soapAction="http://tempuri.org/IService/ParseLog" style="document" />
+    <wsdl:operation name="ParseFromFile">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromFile" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -86,8 +95,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ParseLogCustom">
-      <soap:operation soapAction="http://tempuri.org/IService/ParseLogCustom" style="document" />
+    <wsdl:operation name="ParseFromFileCustom">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromFileCustom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseFromURI">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromURI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseFromURICustom">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromURICustom" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -97,15 +124,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAlarms">
       <soap:operation soapAction="http://tempuri.org/IService/GetAlarms" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="TestMethod">
-      <soap:operation soapAction="http://tempuri.org/IService/TestMethod" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -117,8 +135,8 @@
   <wsdl:binding name="BasicHttpsBinding_IService" type="tns:IService">
     <wsp:PolicyReference URI="#BasicHttpsBinding_IService_policy" />
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ParseLog">
-      <soap:operation soapAction="http://tempuri.org/IService/ParseLog" style="document" />
+    <wsdl:operation name="ParseFromFile">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromFile" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -126,8 +144,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ParseLogCustom">
-      <soap:operation soapAction="http://tempuri.org/IService/ParseLogCustom" style="document" />
+    <wsdl:operation name="ParseFromFileCustom">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromFileCustom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseFromURI">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromURI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseFromURICustom">
+      <soap:operation soapAction="http://tempuri.org/IService/ParseFromURICustom" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -137,15 +173,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAlarms">
       <soap:operation soapAction="http://tempuri.org/IService/GetAlarms" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="TestMethod">
-      <soap:operation soapAction="http://tempuri.org/IService/TestMethod" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

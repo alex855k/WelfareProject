@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="888">
     <Grid>
         <DatePicker HorizontalAlignment="Left" Margin="129,10,0,0" VerticalAlignment="Top"/>
         <Label Content="From" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="lstBx_Alarms" HorizontalAlignment="Left" Height="295" Margin="291,10,0,0" VerticalAlignment="Top" Width="216"/>
-        <Button Name="StartService" Content="Start" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="112" Height="30"/>
+        <ListBox Name="lstBx_Alarms" HorizontalAlignment="Left" Height="295" Margin="291,10,0,0" VerticalAlignment="Top" Width="579"/>
+        <Button Name="StartService" Content="Start" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="112" Height="30" Click="StartService_Click"/>
         <ComboBox Name="Alarms" HorizontalAlignment="Left" Margin="111,41,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Alarms_SelectionChanged"/>
         <Label Content="Alarm Type" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="111,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>

@@ -48,5 +48,10 @@ namespace LogDataConversionServiceApplication
 			return ToReturn;
 
 		}
+
+		public List<string[]> TryParse()
+		{
+			return this.Parse();
+		}
 	}
 }

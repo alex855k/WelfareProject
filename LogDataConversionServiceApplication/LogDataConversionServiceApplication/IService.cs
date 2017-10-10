@@ -12,14 +12,21 @@ namespace LogDataConversionServiceApplication
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
  [ServiceContract]
     public interface IService
-    {
-		[ServiceKnownType("GetKnownTypes", typeof(Helper))]
-		[OperationContract]
-        List<string[]> ParseLog(List<string[]> value);
+    {  
+        [OperationContract]
+       string[][] ParseFromFile(string[] value);
 
+        [OperationContract]
+		string[][] ParseFromFileCustom(string[] value, string parser);
 
 		[OperationContract]
-		List<string[]> ParseLog2(List<string[]> value, string Parser);
+		List<string[]> ParseFromURI(string uri);
+
+		[OperationContract]
+		List<string[]> ParseFromURICustom(string uri, string parser);
+
+		[OperationContract]
+		List<string> GetAlarms();
 
 		[OperationContract]
 		List<string> GetAlarmTypes();
@@ -49,6 +56,7 @@ namespace LogDataConversionServiceApplication
 	//		set { stringValue = value; }
 	//	}
 	//}
+<<<<<<< HEAD
 
 	// This class has the method named GetKnownTypes that returns a generic IEnumerable.
 	static class Helper
@@ -62,4 +70,6 @@ namespace LogDataConversionServiceApplication
 			return knownTypes;
 		}
 	}
+=======
+>>>>>>> cc98d3f54ea687212ce47bd75533c1202392a618
 }

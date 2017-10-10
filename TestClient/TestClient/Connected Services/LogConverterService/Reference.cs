@@ -28,14 +28,15 @@ namespace TestClient.LogConverterService {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        string[][] ParseLog(string[][] value);
+        string[][] ParseLog(string[] value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[][] value);
+        System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
-        string[][] ParseLog2(string[][] value, string Parser);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustom", ReplyAction="http://tempuri.org/IService/ParseLogCustomResponse")]
+        string[][] ParseLogCustom(string[] value, string Parser);
         
+<<<<<<< HEAD
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
         System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[][] value, string Parser);
         
@@ -44,6 +45,16 @@ namespace TestClient.LogConverterService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/TestMethod", ReplyAction="http://tempuri.org/IService/TestMethodResponse")]
         System.Threading.Tasks.Task<TestClient.LogConverterService.AlarmType> TestMethodAsync();
+=======
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustom", ReplyAction="http://tempuri.org/IService/ParseLogCustomResponse")]
+        System.Threading.Tasks.Task<string[][]> ParseLogCustomAsync(string[] value, string Parser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlarms", ReplyAction="http://tempuri.org/IService/GetAlarmsResponse")]
+        string[] GetAlarms();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlarms", ReplyAction="http://tempuri.org/IService/GetAlarmsResponse")]
+        System.Threading.Tasks.Task<string[]> GetAlarmsAsync();
+>>>>>>> cc98d3f54ea687212ce47bd75533c1202392a618
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -73,20 +84,28 @@ namespace TestClient.LogConverterService {
                 base(binding, remoteAddress) {
         }
         
-        public string[][] ParseLog(string[][] value) {
+        public string[][] ParseLog(string[] value) {
             return base.Channel.ParseLog(value);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[][] value) {
+        public System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value) {
             return base.Channel.ParseLogAsync(value);
         }
         
-        public string[][] ParseLog2(string[][] value, string Parser) {
-            return base.Channel.ParseLog2(value, Parser);
+        public string[][] ParseLogCustom(string[] value, string Parser) {
+            return base.Channel.ParseLogCustom(value, Parser);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[][] value, string Parser) {
-            return base.Channel.ParseLog2Async(value, Parser);
+        public System.Threading.Tasks.Task<string[][]> ParseLogCustomAsync(string[] value, string Parser) {
+            return base.Channel.ParseLogCustomAsync(value, Parser);
+        }
+        
+        public string[] GetAlarms() {
+            return base.Channel.GetAlarms();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetAlarmsAsync() {
+            return base.Channel.GetAlarmsAsync();
         }
         
         public TestClient.LogConverterService.AlarmType TestMethod() {

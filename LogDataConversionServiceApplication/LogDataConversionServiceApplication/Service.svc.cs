@@ -6,23 +6,40 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using LogDataConversionServiceApplication.Logfiles;
+using LogDataConversionServiceApplication.Adapters;
 
 namespace LogDataConversionServiceApplication
 {
 	public class Service : IService
 	{
-		public List<string[]> ParseLog(List<string[]> log)
+		public string[][] ParseFromFile(string[] log)
 		{
-			return this.ParseLog2(log, "generic"); // In the future, this should be "smarter" and be able to determine adapter itself.
+			return this.ParseFromFileCustom(log, "generic"); // In the future, this should be "smarter" and be able to determine adapter itself.
 			// Or just make the genereic adapter smart and have it work for "everything".
 		}
 
-		public List<string[]> ParseLog2(List<string[]> log, string parser)
+		public string[][] ParseFromFileCustom(string[] log, string parser)
 		{
-			TextLog Log = new TextLog(log);
-			LogParser Parser = new LogParser(Log);
+			TextLog LogFile = new TextLog(log);
+			LogFile.Parser = parser;
+			LogParser LogParser = new LogParser(LogFile);
 
-			return Parser.Parse();
+			return LogParser.TryParse().ToArray();
+		}
+
+		public List<string[]> ParseFromURI(string uri)
+		{
+			return this.ParseFromURICustom(uri, "generic");
+		}
+
+		public List<string[]> ParseFromURICustom(string uri, string parser)
+		{
+			throw new NotImplementedException();
+		}
+
+		public List<string> GetAlarms()
+		{
+			return new List<string> { "Door Open", "Bed Sensor" };
 		}
 
 		public List<string> GetAlarmTypes()

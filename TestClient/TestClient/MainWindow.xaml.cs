@@ -21,12 +21,8 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-<<<<<<< HEAD
-		ServiceClient LC = new ServiceClient();
-=======
 		string LogFilePath;
 		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
->>>>>>> cc98d3f54ea687212ce47bd75533c1202392a618
 		public MainWindow()
 		{
 			InitializeComponent();

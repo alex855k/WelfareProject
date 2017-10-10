@@ -36,16 +36,6 @@ namespace TestClient.LogConverterService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustom", ReplyAction="http://tempuri.org/IService/ParseLogCustomResponse")]
         string[][] ParseLogCustom(string[] value, string Parser);
         
-<<<<<<< HEAD
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog2", ReplyAction="http://tempuri.org/IService/ParseLog2Response")]
-        System.Threading.Tasks.Task<string[][]> ParseLog2Async(string[][] value, string Parser);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/TestMethod", ReplyAction="http://tempuri.org/IService/TestMethodResponse")]
-        TestClient.LogConverterService.AlarmType TestMethod();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/TestMethod", ReplyAction="http://tempuri.org/IService/TestMethodResponse")]
-        System.Threading.Tasks.Task<TestClient.LogConverterService.AlarmType> TestMethodAsync();
-=======
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustom", ReplyAction="http://tempuri.org/IService/ParseLogCustomResponse")]
         System.Threading.Tasks.Task<string[][]> ParseLogCustomAsync(string[] value, string Parser);
         
@@ -54,7 +44,6 @@ namespace TestClient.LogConverterService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlarms", ReplyAction="http://tempuri.org/IService/GetAlarmsResponse")]
         System.Threading.Tasks.Task<string[]> GetAlarmsAsync();
->>>>>>> cc98d3f54ea687212ce47bd75533c1202392a618
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -106,14 +95,6 @@ namespace TestClient.LogConverterService {
         
         public System.Threading.Tasks.Task<string[]> GetAlarmsAsync() {
             return base.Channel.GetAlarmsAsync();
-        }
-        
-        public TestClient.LogConverterService.AlarmType TestMethod() {
-            return base.Channel.TestMethod();
-        }
-        
-        public System.Threading.Tasks.Task<TestClient.LogConverterService.AlarmType> TestMethodAsync() {
-            return base.Channel.TestMethodAsync();
         }
     }
 }

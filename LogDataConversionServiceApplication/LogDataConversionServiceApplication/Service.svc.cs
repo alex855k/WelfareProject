@@ -42,6 +42,15 @@ namespace LogDataConversionServiceApplication
 			return new List<string> { "Door Open", "Bed Sensor" };
 		}
 
+		public List<string> GetAlarmTypes()
+		{
+			var AlarmTypes = new List<string>();
+			AlarmTypes.Add("Door Open");
+			AlarmTypes.Add("Bed Sensor");
+
+			return AlarmTypes;
+		}
+
 		//public CompositeType GetDataUsingDataContract(CompositeType composite)
 		//{
 		//    if (composite == null)

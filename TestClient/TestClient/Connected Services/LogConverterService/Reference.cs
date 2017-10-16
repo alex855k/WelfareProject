@@ -15,17 +15,29 @@ namespace TestClient.LogConverterService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LogConverterService.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        string[][] ParseLog(string[] value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromFile", ReplyAction="http://tempuri.org/IService/ParseFromFileResponse")]
+        string[][] ParseFromFile(string[] value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLog", ReplyAction="http://tempuri.org/IService/ParseLogResponse")]
-        System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromFile", ReplyAction="http://tempuri.org/IService/ParseFromFileResponse")]
+        System.Threading.Tasks.Task<string[][]> ParseFromFileAsync(string[] value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustom", ReplyAction="http://tempuri.org/IService/ParseLogCustomResponse")]
-        string[][] ParseLogCustom(string[] value, string Parser);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromFileCustom", ReplyAction="http://tempuri.org/IService/ParseFromFileCustomResponse")]
+        string[][] ParseFromFileCustom(string[] value, string parser);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseLogCustom", ReplyAction="http://tempuri.org/IService/ParseLogCustomResponse")]
-        System.Threading.Tasks.Task<string[][]> ParseLogCustomAsync(string[] value, string Parser);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromFileCustom", ReplyAction="http://tempuri.org/IService/ParseFromFileCustomResponse")]
+        System.Threading.Tasks.Task<string[][]> ParseFromFileCustomAsync(string[] value, string parser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromURI", ReplyAction="http://tempuri.org/IService/ParseFromURIResponse")]
+        string[][] ParseFromURI(string uri);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromURI", ReplyAction="http://tempuri.org/IService/ParseFromURIResponse")]
+        System.Threading.Tasks.Task<string[][]> ParseFromURIAsync(string uri);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromURICustom", ReplyAction="http://tempuri.org/IService/ParseFromURICustomResponse")]
+        string[][] ParseFromURICustom(string uri, string parser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ParseFromURICustom", ReplyAction="http://tempuri.org/IService/ParseFromURICustomResponse")]
+        System.Threading.Tasks.Task<string[][]> ParseFromURICustomAsync(string uri, string parser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlarms", ReplyAction="http://tempuri.org/IService/GetAlarmsResponse")]
         string[] GetAlarms();
@@ -61,20 +73,36 @@ namespace TestClient.LogConverterService {
                 base(binding, remoteAddress) {
         }
         
-        public string[][] ParseLog(string[] value) {
-            return base.Channel.ParseLog(value);
+        public string[][] ParseFromFile(string[] value) {
+            return base.Channel.ParseFromFile(value);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLogAsync(string[] value) {
-            return base.Channel.ParseLogAsync(value);
+        public System.Threading.Tasks.Task<string[][]> ParseFromFileAsync(string[] value) {
+            return base.Channel.ParseFromFileAsync(value);
         }
         
-        public string[][] ParseLogCustom(string[] value, string Parser) {
-            return base.Channel.ParseLogCustom(value, Parser);
+        public string[][] ParseFromFileCustom(string[] value, string parser) {
+            return base.Channel.ParseFromFileCustom(value, parser);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ParseLogCustomAsync(string[] value, string Parser) {
-            return base.Channel.ParseLogCustomAsync(value, Parser);
+        public System.Threading.Tasks.Task<string[][]> ParseFromFileCustomAsync(string[] value, string parser) {
+            return base.Channel.ParseFromFileCustomAsync(value, parser);
+        }
+        
+        public string[][] ParseFromURI(string uri) {
+            return base.Channel.ParseFromURI(uri);
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> ParseFromURIAsync(string uri) {
+            return base.Channel.ParseFromURIAsync(uri);
+        }
+        
+        public string[][] ParseFromURICustom(string uri, string parser) {
+            return base.Channel.ParseFromURICustom(uri, parser);
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> ParseFromURICustomAsync(string uri, string parser) {
+            return base.Channel.ParseFromURICustomAsync(uri, parser);
         }
         
         public string[] GetAlarms() {

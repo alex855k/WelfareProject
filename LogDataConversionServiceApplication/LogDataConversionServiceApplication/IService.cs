@@ -28,6 +28,9 @@ namespace LogDataConversionServiceApplication
 		[OperationContract]
 		List<string> GetAlarms();
 
+		[OperationContract]
+		List<string> GetAlarmTypes();
+
 		//[OperationContract]
   //      CompositeType GetDataUsingDataContract(CompositeType composite);
 
@@ -53,4 +56,20 @@ namespace LogDataConversionServiceApplication
 	//		set { stringValue = value; }
 	//	}
 	//}
+<<<<<<< HEAD
+
+	// This class has the method named GetKnownTypes that returns a generic IEnumerable.
+	static class Helper
+	{
+		public static IEnumerable<Type> GetKnownTypes(ICustomAttributeProvider provider)
+		{
+			List<Type> knownTypes =
+				new List<Type>();
+			// Add any types to include here.
+			knownTypes.Add(typeof(AlarmType));
+			return knownTypes;
+		}
+	}
+=======
+>>>>>>> cc98d3f54ea687212ce47bd75533c1202392a618
 }

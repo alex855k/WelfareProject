@@ -23,7 +23,7 @@ namespace TestClient
 	{
 		List<LogFile> _logFilePath;
         
-	    private Reader reader;
+	    private LogReader reader;
 		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
 		public MainWindow()
 		{
@@ -68,7 +68,7 @@ namespace TestClient
 		private void StartService_Click(object sender, RoutedEventArgs e)
 		{
             //Initialize reader if it's null otherwise read
-            reader = new Reader(_logFilePath, FileLocation.Local);
+            reader = new LogReader(_logFilePath, FileLocation.Local);
 
             // 
             FilterLog();
@@ -76,7 +76,7 @@ namespace TestClient
             //Initialize reader
 		    try
 		    {
-		        Reader r = 
+		        LogReader r = 
             }
 		    catch (Exception exception)
 		    {

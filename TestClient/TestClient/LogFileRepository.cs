@@ -11,7 +11,8 @@ namespace TestClient
     {
         private DirectoryInfo repDir;
         private const string idPath = "currentid.txt";
-        public Dictionary<int,LogFile> _logs;
+        public Dictionary<int, LogFile> _logs;
+
         public LogFileRepository()
         {
             InitializeRepository();
@@ -22,6 +23,7 @@ namespace TestClient
             LoadLogFiles();
 
         }
+
         public string FormatFileName(int id)
         {
             return "log" + id + ".txt";
@@ -39,6 +41,7 @@ namespace TestClient
                 }
             }
         }
+
         private void DirectoryExists()
         {
             if (!repDir.Exists)
@@ -55,30 +58,12 @@ namespace TestClient
 
 
         private void SaveLog(LogFile logfile)
-        { 
+        {
             using (StreamWriter wr = new StreamWriter(repDir + FileName(s))
             {
 
                 wr.WriteLine(logfile.ToString());
             }
         }
-
-        private void DeleteDirectory(string directory)
-        {
-            string[] files = Directory.GetFiles(directory);
-            string[] dirs = Directory.GetDirectories(directory);
-
-            foreach (string file in files)
-            {
-                File.SetAttributes(file, FileAttributes.Normal);
-                File.Delete(file);
-            }
-
-            foreach (string dir in dirs)
-            {
-                DeleteDirectory(dir);
-            }
-
-            Directory.Delete(directory, false);
-        }
+    
 }

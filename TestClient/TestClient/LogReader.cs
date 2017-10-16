@@ -36,7 +36,7 @@ namespace TestClient
 
         public string FileDirectory { get; set; }
 
-
+        
         /* Reader for URI fileDirectory is where it should be stored once copied locally, filename is the filename on the domain
          * Implemented this as a second option as it wasn't specified where the file would be coming from.
          * However our test solution will be simulating fake data being written to a log

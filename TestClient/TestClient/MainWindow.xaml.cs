@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,14 +21,24 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		string LogFilePath;
+		List<LogFile> _logFilePath;
+        
+	    private Reader reader;
 		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
 		public MainWindow()
 		{
+            //Load all the logs
+		    LoadAllLogFiles();
+
 			InitializeComponent();
 		}
 
-		private void LogFile_Click(object sender, RoutedEventArgs e)
+	    private void LoadLogReaders()
+	    {
+	        using()
+	    }
+
+	    private void LogFile_Click(object sender, RoutedEventArgs e)
 		{
 			// Create OpenFileDialog 
 			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -48,7 +59,7 @@ namespace TestClient
 			{
 				// Open document 
 				string filename = dlg.FileName;
-				LogFilePath = filename;
+			    _logFilePath = filename;
 				StartService.IsEnabled = true;
 				lbl_Warning.Content = "";
 			}
@@ -56,6 +67,25 @@ namespace TestClient
 
 		private void StartService_Click(object sender, RoutedEventArgs e)
 		{
+            //Initialize reader if it's null otherwise read
+            reader = new Reader(_logFilePath, FileLocation.Local);
+
+            // 
+            FilterLog();
+
+            //Initialize reader
+		    try
+		    {
+		        Reader r = 
+            }
+		    catch (Exception exception)
+		    {
+                // Writing exceptions to log
+		        EventLog.WriteEntry("", exception.Message);
+		        throw;
+		    }
+		  
+
 			string[] file = System.IO.File.ReadAllLines(LogFilePath);
 			var ParsedLog = LC.ParseLog(file);
 			

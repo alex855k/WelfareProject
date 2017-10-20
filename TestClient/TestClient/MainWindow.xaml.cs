@@ -21,21 +21,19 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		List<LogFile> _logFilePath;
+        private LogFileRepository repository
         
 	    private LogReader reader;
 		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
 		public MainWindow()
 		{
-            //Load all the logs
-		    LoadAllLogFiles();
 
 			InitializeComponent();
 		}
 
 	    private void LoadLogReaders()
 	    {
-	        using()
+	       // using()
 	    }
 
 	    private void LogFile_Click(object sender, RoutedEventArgs e)

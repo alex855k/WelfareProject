@@ -10,18 +10,21 @@ namespace TestClient
     public class LogFileRepository
     {
         private DirectoryInfo repDir;
+        private char seperationChar = ';';
         private const string idPath = "currentid.txt";
         public Dictionary<int, LogFile> _logs;
-
+        
+        
         public LogFileRepository()
         {
-            InitializeRepository();
+            InitRepository();
         }
 
-        private void InitializeRepository()
+        private void InitRepository()
         {
+            repDir = new DirectoryInfo("LogFiles/");
+            DirectoryExists();
             LoadLogFiles();
-
         }
 
         public string FormatFileName(int id)
@@ -33,11 +36,22 @@ namespace TestClient
         {
             _logs.Clear();
             {
-                using (StreamReader sr = new StreamReader())
+                foreach (var path in repDir.GetFiles("log*.txt"))
                 {
-                    foreach (var s in sr.ReadLine())
-                    {
-                    }
+                    LoadLog(path.Name);
+                }
+            }
+        }
+
+        private void LoadLog(string path)
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                while (!sr.EndOfStream)
+                {
+                    // 0 
+                    sr.ReadLine().Split(seperationChar);
+                    _logs.Add(LogFile());
                 }
             }
         }
@@ -51,9 +65,9 @@ namespace TestClient
         }
 
 
-        public LogFile LoadLog(int id)
+        public LogFile GetLogFile(int id)
         {
-            return FormatFileName(id);
+            return _logs[id];
         }
 
 

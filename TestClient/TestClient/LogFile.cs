@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,24 +11,25 @@ namespace TestClient
 {
     public class LogFile
     {
+        public Object _logfileLock = new Object();
+        public bool InUse { get; set; }
+        private string _fileDir = "LogFiles/";
+        public FileLocationType FileLocationType { get; private set; }
+        public string Url { get; }
+        public string[] LogData { get; set; } 
+        public char SeperationChar { get => seperationChar; set => seperationChar = value; }
+        private string[] _dataFile;
+        private char seperationChar = '\t';
+        private string _fileName = "";
+        public string FileLocation => _fileDir + _fileName;
+        public bool HasHeader { get; set; } = true;
 
-        public FileLocation FileLocationType { get; private set; }
-
-        public LogFile(string fileDirectory, string URL, FileLocation location)
+        public LogFile(string fileName, string URL, FileLocationType location)
         {
-            FileDirectory = fileDirectory;
             Url = URL;
+            _fileName = fileName;
             FileLocationType = location;
-            InitializeFileToReader();
-        }
-
-
-        // Reader constructor for a file that is already stored locally.
-        public LogFile(string fileDirectory, FileLocation location)
-        {
-            FileDirectory = fileDirectory;
-            FileLocationType = location;
-            InitializeFileToReader();
+            //  CopyFileToLocalDirectory();
         }
 
         private void IncrementIdCounter()
@@ -46,7 +49,15 @@ namespace TestClient
                 Console.WriteLine(e);
                 throw;
             }
-
+        }
+        private void CopyFileToLocalDirectory()
+        {
+            // Use webclient to grab file and save a local copy of it.
+            using (var client = new WebClient())
+            {
+                client.DownloadFile("https://pastebin.com/raw/N2TUeGnw", "LogFiles/example.txt");
+            }
+            FileLocationType = FileLocationType.Local;
         }
     }
 }

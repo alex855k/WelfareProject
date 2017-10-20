@@ -15,12 +15,9 @@ namespace TestClient
     //The responsibility of this class is to read the data and return only the data that is nessecary as a string array.
     public class LogReader
     {
-        public string FilePath => FileDirectory + Url;
-        public string Url { get; }
-        private string[] _dataFile;
-        private bool _hasHeader = true;
-        private char seperationChar = '\t';
-        private readonly char[] specialChars = {'\t', ';'};
+        private DateTime _cutoffDateTime;
+        private LogFile _logFile;
+        private readonly char[] specialChars = { '\t', ';' };
         // Regex for finding date column.
         private static string _dateRegexExp = 
                                     // DD-MM-YYYY 
@@ -43,21 +40,24 @@ namespace TestClient
          */
         public LogReader(LogFile log, DateTime readFromDateTime)
         {
+            _logFile = log;
+            _cutoffDateTime = readFromDateTime;
             InitializeFileToReader();
         }
 
         public LogReader(LogFile log)
         {
+            _logFile = log;
             InitializeFileToReader();
         }
 
         private void InitializeFileToReader()
         {
             // Split all lines of data into a string a array
-            _dataFile = File.ReadAllLines(FilePath, Encoding.GetEncoding("iso-8859-1"));
-            // seperation character is stored here, just using a default character
-            seperationChar = GetSeperationChar(_dataFile);
-            _dateColumnIndex = FindDateColumnIndex(_dataFile);
+            _logFile.LogData = File.ReadAllLines(_logFile.FileLocation, Encoding.GetEncoding("iso-8859-1"));
+            // seperation character is found here if it wasn't already located
+            if (_logFile.SeperationChar == ' ') _logFile.SeperationChar = FindSeperationChar(_logFile.LogData);
+            _dateColumnIndex = FindDateColumnIndex(_logFile.LogData);
         }
 
 
@@ -67,7 +67,7 @@ namespace TestClient
             foreach (var line in dataFile)
             {
                 // For every line of data split the data into columns
-                string[] columns = line.Split(seperationChar);
+                string[] columns = line.Split(_logFile.SeperationChar);
                 
                     for (int columnCount = 0; columnCount < columns.Length; columnCount++)
                     {
@@ -75,7 +75,7 @@ namespace TestClient
                          Match m = _dateRegex.Match(columns[columnCount]);
                         if (m.Success)
                         {
-                            if (countLines == 0) _hasHeader = false;
+                            if (countLines == 0) _logFile.HasHeader = false;
                             return columnCount;
                         }
                     }
@@ -83,7 +83,7 @@ namespace TestClient
             return -1;
         }
 
-        public char GetSeperationChar(string[] data)
+        public char FindSeperationChar(string[] data)
         {
             char seperationChar = ';';
             foreach (var specialC in specialChars)
@@ -101,15 +101,15 @@ namespace TestClient
             // If file location is still remote fetch a copy and store it locally and set the filepath
            // MOVE THIS  if (FileLocationType == FileLocation.URI) CopyFileToLocalDirectory();
 
-            if (FilePath != string.Empty) { 
+            if (File.Exists(_logFile.FileLocation)) { 
                          
                 // string array containing the needed strings to send over the network.
                 List<string> parseAbleData = new List<string>();
 
-                foreach (var line in _dataFile)
+                foreach (var line in _logFile.LogData)
                 {
                     // For every line of data split the data into columns
-                    string[] columns = line.Split(seperationChar);
+                    string[] columns = line.Split(_logFile.SeperationChar);
                     // If date is before the cutoff date
                     if (DateTime.Compare(Convert.ToDateTime(columns[_dateColumnIndex]), cutoffDateTime) > -1)
                     {
@@ -119,17 +119,6 @@ namespace TestClient
                 }
             }
             throw new Exception("File not located!");
-        }
-
-        private void CopyFileToLocalDirectory()
-        {
-
-            // Use webclient to grab file and save a local copy of it.
-            using (var client = new WebClient())
-            {
-                client.DownloadFile("https://pastebin.com/raw/N2TUeGnw", "LogFiles/example.txt");
-            }
-            FileLocationType = FileLocation.Local;
         }
     }
 }

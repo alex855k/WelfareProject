@@ -5,19 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="888">
+        Title="UzisoClientSim" Height="350" Width="888">
     <Grid>
-        <DatePicker HorizontalAlignment="Left" Margin="129,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="From" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="lstBx_Alarms" HorizontalAlignment="Left" Height="295" Margin="291,10,0,0" VerticalAlignment="Top" Width="579"/>
-        <Button Name="StartService" Content="Start" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="112" Height="30" Click="StartService_Click"/>
-        <ComboBox Name="Alarms" HorizontalAlignment="Left" Margin="111,41,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Alarms_SelectionChanged"/>
-        <Label Content="Alarm Type" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="111,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Name" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.558"/>
-        <Button Name="StopService" Content="Stop" HorizontalAlignment="Left" Margin="122,99,0,0" VerticalAlignment="Top" Width="112" Height="30"/>
-        <Button Name="LogFile" Content="Logfile Path" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="75" Click="LogFile_Click"/>
-        <Label Name="lbl_Warning" Content="Please Select Logfile Before Starting Service" HorizontalAlignment="Left" Margin="9,134,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="388,51,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cutoff date&#xD;&#xA;" HorizontalAlignment="Left" Margin="314,51,0,0" VerticalAlignment="Top"/>
+        <StackPanel>
+            <Grid>
+                <ScrollViewer Margin="504,20,10,-20">
+                    <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" Name="lstBx_Alarms" HorizontalAlignment="Left" Height="268" VerticalAlignment="Top" Width="348"/>
+                </ScrollViewer>
+            </Grid>
+        </StackPanel>
+
+        <Button Name="StartService" Content="Start" HorizontalAlignment="Left" Margin="388,165,0,0" VerticalAlignment="Top" Width="102" Height="20" Click="StartService_Click"/>
+        <ComboBox Name="Alarms" HorizontalAlignment="Left" Margin="388,87,0,0" VerticalAlignment="Top" Width="102" SelectionChanged="Alarms_SelectionChanged" />
+        <Label Content="Alarm Type" HorizontalAlignment="Left" Margin="314,87,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.53,1.149"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="388,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="341,126,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.558"/>
+        <Button Name="StopService" Content="Stop" HorizontalAlignment="Left" Margin="388,190,0,0" VerticalAlignment="Top" Width="102" Height="20"/>
+        <Button Name="LogFile" Content="Select logfile" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="75" Click="LogFile_Click"/>
+        <Label Name="lbl_Warning" Content="Add the logfiles to read from." HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="251"/>
+        <Label x:Name="lbl_Warning_Copy" Content="List of logfiles" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.927"/>
+        <Label x:Name="lbl_Warning_Copy1" Content="Parsed log data" HorizontalAlignment="Left" Margin="329,10,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="StartService_Copy" Content="Remove log" HorizontalAlignment="Left" Margin="189,289,0,0" VerticalAlignment="Top" Width="105" Height="20" Click="StartService_Click" RenderTransformOrigin="1.062,-0.652"/>
+        <TextBox  IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="90,33,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
+        <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="310,0,0,0" Fill="Black" Height="auto" Width="1"/>
+        <Rectangle HorizontalAlignment="Left" Margin="0,0,0,50" Fill="Black" Height="1" Width="310"/>
+        <ListBox x:Name="logfiles_ListBox" HorizontalAlignment="Left" Height="119" Margin="10,165,0,0" VerticalAlignment="Top" Width="284"/>
+        <Button Content="Add log" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="206,109,0,0" RenderTransformOrigin="0.203,-0.493"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="90,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191" />
+        <Label x:Name="lbl_Warning_Copy2" Content="Description" HorizontalAlignment="Left" Margin="17,68,0,0" VerticalAlignment="Top" Width="150"/>
 
     </Grid>
 </Window>

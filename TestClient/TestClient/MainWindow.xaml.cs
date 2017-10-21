@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -21,13 +22,12 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-        private LogFileRepository repository
-        
+	    private LogFileRepository repository;
+	    private ObservableCollection<LogFile> _logfiles = new ObservableCollection<LogFile>();
 	    private LogReader reader;
 		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
 		public MainWindow()
 		{
-
 			InitializeComponent();
 		}
 
@@ -92,5 +92,10 @@ namespace TestClient
 				lstBx_Alarms.Items.Add(line.ToString());
 			}
 		}
-	}
+
+        private void AddLog_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
 }

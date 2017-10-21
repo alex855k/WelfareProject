@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using Microsoft.Win32;
+using TestClient.LogConverterService;
 
 namespace TestClient
 {
@@ -15,6 +17,9 @@ namespace TestClient
     //The responsibility of this class is to read the data and return only the data that is nessecary as a string array.
     public class LogReader
     {
+        private IService _logService;
+        private Thread _reader;
+        private int _frequencySec = 5;
         private DateTime _cutoffDateTime;
         private LogFile _logFile;
         private readonly char[] specialChars = { '\t', ';' };
@@ -32,14 +37,18 @@ namespace TestClient
         private int _dateColumnIndex;
 
         public string FileDirectory { get; set; }
+        private string _firstLine;
+        private bool _running;
 
-        
         /* Reader for URI fileDirectory is where it should be stored once copied locally, filename is the filename on the domain
          * Implemented this as a second option as it wasn't specified where the file would be coming from.
          * However our test solution will be simulating fake data being written to a log
          */
-        public LogReader(LogFile log, DateTime readFromDateTime)
+        public LogReader(LogFile log, DateTime readFromDateTime, IService logService)
         {
+            _logService = logService;
+            // REMOVE
+            _logService = new ServiceClient();
             _logFile = log;
             _cutoffDateTime = readFromDateTime;
             InitializeFileToReader();
@@ -96,7 +105,12 @@ namespace TestClient
             return seperationChar;
         }
 
-        private string[] GetData(DateTime cutoffDateTime)
+        private string[][] GetNewLines()
+        {
+            return _logService.ParseFromFile(_logFile.GetNewLines().ToArray());
+        }
+
+        private string[] GetData()
         {
             // If file location is still remote fetch a copy and store it locally and set the filepath
            // MOVE THIS  if (FileLocationType == FileLocation.URI) CopyFileToLocalDirectory();
@@ -111,7 +125,7 @@ namespace TestClient
                     // For every line of data split the data into columns
                     string[] columns = line.Split(_logFile.SeperationChar);
                     // If date is before the cutoff date
-                    if (DateTime.Compare(Convert.ToDateTime(columns[_dateColumnIndex]), cutoffDateTime) > -1)
+                    if (DateTime.Compare(Convert.ToDateTime(columns[_dateColumnIndex]), _cutoffDateTime) > -1)
                     {
                         return parseAbleData.ToArray();
                     }

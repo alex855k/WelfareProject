@@ -22,20 +22,6 @@ namespace TestClient
         private int _frequencySec = 5;
         private DateTime _cutoffDateTime;
         private LogFile _logFile;
-        private readonly char[] specialChars = { '\t', ';' };
-        // Regex for finding date column.
-        private static string _dateRegexExp = 
-                                    // DD-MM-YYYY 
-                                    "((?:(?:[0-2]?\\d{1})|(?:[3][01]{1}))[-:\\/.](?:[0]?[1-9]|[1][012])[-"+
-                                    ":\\/.](?:(?:[1]{1}\\d{1}\\d{1}\\d{1})|(?:[2]{1}\\d{3})))(?![\\d])" +
-                                    // White Space
-                                    "(\\s+)"+
-                                    // Hour:Minute:Sec
-                                    "((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?)"
-                                    ; 
-        private readonly Regex _dateRegex = new Regex(_dateRegexExp, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        private int _dateColumnIndex;
-
         public string FileDirectory { get; set; }
         private string _firstLine;
         private bool _running;
@@ -51,22 +37,11 @@ namespace TestClient
             _logService = new ServiceClient();
             _logFile = log;
             _cutoffDateTime = readFromDateTime;
-            InitializeFileToReader();
         }
 
         public LogReader(LogFile log)
         {
             _logFile = log;
-            InitializeFileToReader();
-        }
-
-        private void InitializeFileToReader()
-        {
-            // Split all lines of data into a string a array
-            _logFile.LogData = File.ReadAllLines(_logFile.FileLocation, Encoding.GetEncoding("iso-8859-1"));
-            // seperation character is found here if it wasn't already located
-            if (_logFile.SeperationChar == ' ') _logFile.SeperationChar = FindSeperationChar(_logFile.LogData);
-            _dateColumnIndex = FindDateColumnIndex(_logFile.LogData);
         }
 
 

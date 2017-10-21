@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,14 +23,20 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-	    private LogFileRepository repository;
-	    private ObservableCollection<LogFile> _logfiles = new ObservableCollection<LogFile>();
+	    private LogFileRepository rep = new LogFileRepository();
+	    private ObservableCollection<LogFile> LogFiles => rep.Logs;
 	    private LogReader reader;
 		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
 		public MainWindow()
 		{
+		    LoadLogFiles();
 			InitializeComponent();
 		}
+
+	    private void LoadLogFiles()
+	    {
+	        rep.LoadLogFiles();
+	    }
 
 	    private void LoadLogReaders()
 	    {
@@ -57,7 +64,7 @@ namespace TestClient
 			{
 				// Open document 
 				string filename = dlg.FileName;
-			    _logFilePath = filename;
+			   // _logFilePath = filename;
 				StartService.IsEnabled = true;
 				lbl_Warning.Content = "";
 			}
@@ -66,15 +73,15 @@ namespace TestClient
 		private void StartService_Click(object sender, RoutedEventArgs e)
 		{
             //Initialize reader if it's null otherwise read
-            reader = new LogReader(_logFilePath, FileLocation.Local);
+           // reader = new LogReader(_logFilePath, FileLocation.Local);
 
             // 
-            FilterLog();
+          //  FilterLog();
 
             //Initialize reader
 		    try
 		    {
-		        LogReader r = 
+		      //  LogReader r = 
             }
 		    catch (Exception exception)
 		    {
@@ -84,18 +91,35 @@ namespace TestClient
 		    }
 		  
 
-			string[] file = System.IO.File.ReadAllLines(LogFilePath);
-			var ParsedLog = LC.ParseLog(file);
+		//	string[] file = System.IO.File.ReadAllLines(LogFilePath);
+			//var ParsedLog = LC.ParseLog(file);
 			
-			foreach(string[] line in ParsedLog)
+		/*	foreach(string[] line in ParsedLog)
 			{
 				lstBx_Alarms.Items.Add(line.ToString());
 			}
+            */
 		}
+
+	    private void StopService_Click(object sender, RoutedEventArgs e)
+	    {
+
+	    }
 
         private void AddLog_Click(object sender, RoutedEventArgs e)
         {
-
+            if (File.Exists(TextBoxFilePath.Text) && TextboxDescription.Text != string.Empty &&
+                TextBoxAlarmType.Text != string.Empty)
+            {
+                LogFile logFile = new LogFile(TextBoxFilePath.Text, TextboxDescription.Text, TextBoxAlarmType.Text);
+                rep.SaveLog(logFile);
+                MessageBox.Show("Successfully added logfile");
+            }
+            else
+            {
+                MessageBox.Show("Couldn't add log");
+            }
+            
         }
     }
 }

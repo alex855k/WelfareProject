@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,11 @@ namespace TestClient
 {
     public class LogFileRepository
     {
-        private ObservableCollection<LogFile> _logs = new ObservableCollection<LogFile>();
         private DirectoryInfo repDir;
-        private char seperationChar = ';';
+        private char seperationChar = 'å';
         private long currentID;
         private const string idPath = "currentid.txt";
-
-
+        public ObservableCollection<LogFile> Logs { get; } = new ObservableCollection<LogFile>();
         public LogFileRepository()
         {
             InitRepository();
@@ -67,39 +66,78 @@ namespace TestClient
 
         public ObservableCollection<LogFile> LoadLogFiles()
         {
-            _logs.Clear();
+            Logs.Clear();
                 foreach (var path in repDir.GetFiles("log*.txt"))
                 {
-                    _logs.Add(LoadLog(path.Name));
+                    Logs.Add(LoadLog(path.Name));
                 }
-            return _logs;
+            return Logs;
         }
 
-        private void DeleteLogFile(LogFile l)
+        public void DeleteLogFile(LogFile l)
         {
-            File.Delete(repDir + l.);
+            long id = l.ID;
+            File.Delete(repDir + FormatFileName(id));
+            Logs.Remove(Logs.First(log => log.ID == id));
         }
-        private void DeleteLogFile()
+
+        public void DeleteLogFile(long id)
         {
-            File.Delete(repDir + );
+            try
+            {
+                File.Delete(repDir + FormatFileName(id));
+                Logs.Remove(Logs.First(log => log.ID == id));
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                throw;
+            }
         }
 
         private LogFile LoadLog(string path)
         {
+            LogFile f = null;
             using (StreamReader sr = new StreamReader(path))
             {
                 while (!sr.EndOfStream)
                 {
                     //Implement
                     string[] filedata = sr.ReadLine().Split(seperationChar);
-                    //0
-                    FileLocationType fl;
-                    Enum.TryParse(filedata[0], out fl);
-                    LogFile l = new LogFile(path, FileLocationType.Local);
-                    sr.ReadLine().Split(seperationChar);
-                    //_logs.Add(, );
+                    Logs.Add(CreateLogFile(filedata));
                 }
             }
+            return f;
+        }
+
+        private LogFile CreateLogFile(string[] data)
+        {
+            LogFile l = new LogFile();
+
+            long id;
+            long.TryParse(data[0], out id);
+            l.ID = id;
+
+            FileLocationType fl;
+            Enum.TryParse(data[1], out fl);
+            l.FileLocationType = fl;
+
+            string fileLocation = data[2];
+            l.FileLocation = fileLocation;
+
+            char sepC = char.Parse(data[3]);
+            l.SeperationChar = sepC;
+
+            bool hasheader;
+            bool.TryParse(data[4], out hasheader);
+
+            string description = data[5];
+            l.Description = description;
+
+            string alarmtype = data[6];
+            l.AlarmType = alarmtype;
+       
+            return l;
         }
 
         private void DirectoryExists()
@@ -110,7 +148,7 @@ namespace TestClient
             }
         }
 
-        private void SaveLog(LogFile logfile)
+        public void SaveLog(LogFile logfile)
         {
             long id;
             // if id = 0 means it's a new file then get next ID
@@ -125,10 +163,7 @@ namespace TestClient
             
             using (StreamWriter wr = new StreamWriter(repDir + FormatFileName(id)))
             {
-                //Implement
-                
-                
-                wr.WriteLine(logfile.SaveStringFormat());
+                wr.WriteLine(logfile.FormatSaveString(seperationChar));
             }
         }
     }

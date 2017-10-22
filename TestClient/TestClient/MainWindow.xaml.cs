@@ -4,17 +4,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TestClient.LogConverterService;
 using TestClient.ViewModels;
 
@@ -25,10 +16,12 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+	    private bool _running;
+	    private DateTime _cutOffDateTime;
+	    private Thread t;
 	    private ApplicationViewModel _vm;
 	    private LogFileRepository rep = new LogFileRepository();
         //private ObservableCollection<LogFile> LogFiles => rep.Logs;
-	    public ObservableCollection<LogFile> LogFils { get; } = new ObservableCollection<LogFile>();
 	    private LogParser _parser;
 		ServiceClient LC = new ServiceClient();
 		public MainWindow()
@@ -37,30 +30,12 @@ namespace TestClient
 		    _vm = new ApplicationViewModel();
 		    _vm.LogFileRep = rep; 
 		    this.DataContext = _vm;
-            //LoadLogFiles();
 		}
-
-	    private void LoadLogFiles()
-	    {
-	        LogFile l = new LogFile();
-	        l.Id = 1;
-	        LogFile l2 = new LogFile();
-	        l2.Id = 2;
-            LogFils.Add(l);
-            LogFils.Add(l2);
-	    }
-
-	    private void LoadLogReaders()
-	    {
-	       // using()
-	    }
 
 	    private void LogFile_Click(object sender, RoutedEventArgs e)
 		{
 			// Create OpenFileDialog 
 			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-
-
 
 			// Set filter for file extension and default file extension 
 			dlg.DefaultExt = ".txt";
@@ -84,40 +59,65 @@ namespace TestClient
 			}
 		}
 
+	    private void RunService()
+	    {
+	        bool firstUse = true;
+	        while (_running)
+	        {
+	            Dispatcher.BeginInvoke(new Action(() =>
+	            {
+                    //Store collective data
+                    List<string[]> collectiveData = new List<string[]>();
+                    // collectiveData.Sort(l => l[0] > 0);
+
+	                //send request to service
+	                foreach (LogFile l in rep.Logs)
+	                {
+	                    string[][] data;
+	                    if (firstUse)
+	                    {
+	                        data = LC.ParseFromFile(l.GetInitialData(_cutOffDateTime));
+	                        firstUse = false;
+	                    }
+	                    else
+	                    {
+	                        data = LC.ParseFromFile(l.GetInitialData(_cutOffDateTime));
+	                    }
+	                    List<string[]> newData = new List<string[]>();
+                        foreach (var line in data)
+	                    {
+	                        newData.Add(line);
+                        }
+	                    collectiveData.AddRange(newData);
+                        // ***** Finish IMPLEMENTAION *****
+
+
+                        // Sort data by date
+                    }
+                    
+                 //store data in ParsedLogfile object
+
+                //put new
+            }));
+	            Thread.Sleep(TimeSpan.FromSeconds(5));
+            }
+	    }
 		private void StartService_Click(object sender, RoutedEventArgs e)
 		{
-            //Initialize _parser if it's null otherwise read
-           // _parser = new LogParser(_logFilePath, FileLocation.Local);
-
-            // 
-          //  FilterLog();
-
-            //Initialize _parser
-		    try
-		    {
-		      //  LogParser r = 
+            if(ComboBoxAlarmType.SelectionBoxItem != null && DatePicker.SelectedDate !=null && PersonName.Text != string.Empty)
+            {
+                _cutOffDateTime = DatePicker.SelectedDate.Value;
+		        _running = true; 
+		        t = new Thread(RunService);
+                t.Start();
+                MessageBox.Show("Service started");
             }
-		    catch (Exception exception)
-		    {
-                // Writing exceptions to log
-		        EventLog.WriteEntry("", exception.Message);
-		        throw;
-		    }
-		  
-
-		//	string[] file = System.IO.File.ReadAllLines(LogFilePath);
-			//var ParsedLog = LC.ParseLog(file);
-			
-		/*	foreach(string[] line in ParsedLog)
-			{
-				lstBx_Alarms.Items.Add(line.ToString());
-			}
-            */
-		}
+        }
 
 	    private void StopService_Click(object sender, RoutedEventArgs e)
 	    {
-
+            t.Abort();
+	        t = null;
 	    }
 
         private void AddLog_Click(object sender, RoutedEventArgs e)
@@ -132,8 +132,7 @@ namespace TestClient
             else
             {
                 MessageBox.Show("Couldn't add log");
-            }
-            
+            } 
         }
 
         private void RemoveLogButton_Click(object sender, RoutedEventArgs e)

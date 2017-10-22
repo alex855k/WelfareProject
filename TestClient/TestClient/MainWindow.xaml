@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestClient"
         mc:Ignorable="d"
-        Title="UzisoClientSim" Height="650" Width="1024">
+        Title="UzisoClientSim" Height="650" MaxHeight="650" Width="1024" MaxWidth="1024">
     <Grid Background="Azure">
         <DatePicker x:Name="DatePicker" HorizontalAlignment="Left" Margin="390,34,0,0" VerticalAlignment="Top"/>
         <Label Content="Cutoff date&#xA;" HorizontalAlignment="Left" Margin="316,34,0,0" VerticalAlignment="Top"/>
@@ -20,13 +20,13 @@
         </Grid>
 
         <Button Name="StartService" Content="Start" HorizontalAlignment="Left" Margin="390,148,0,0" VerticalAlignment="Top" Width="102" Height="20" Click="StartService_Click"/>
-        <ComboBox Height="25"
+        <ComboBox x:Name="ComboBoxAlarmType" Height="25"
             ItemsSource="{Binding LogFiles}"
             DisplayMemberPath="AlarmType"
             SelectedValue="{Binding LogFile}"
             SelectedValuePath="TwoLetterCode" Margin="390,71,524,523" />
         <Label Content="Alarm Type" HorizontalAlignment="Left" Margin="316,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.53,1.149"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="390,109,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="PersonName" HorizontalAlignment="Left" Height="23" Margin="390,109,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="102"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="343,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.558"/>
         <Button Name="StopService" Content="Stop" HorizontalAlignment="Left" Margin="390,173,0,0" VerticalAlignment="Top" Width="102" Height="20" Click="StopService_Click"/>
         <Button Name="LogFile" Content="Select logfile" HorizontalAlignment="Left" Margin="206,5,0,0" VerticalAlignment="Top" Width="75" Click="LogFile_Click"/>

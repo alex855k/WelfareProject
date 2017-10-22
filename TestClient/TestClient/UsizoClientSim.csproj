@@ -57,9 +57,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FileLocationType.cs" />
+    <Compile Include="Helpers\ObserableObject.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="LogFileRepository.cs" />
     <Compile Include="LogFile.cs" />
-    <Compile Include="LogReader.cs" />
+    <Compile Include="LogParser.cs" />
+    <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,7 +110,6 @@
     <None Include="Connected Services\LogConverterService\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="LogFiles\Logfile.xlsx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -136,9 +138,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="LogFiles\logfil.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

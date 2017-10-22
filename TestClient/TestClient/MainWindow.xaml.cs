@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestClient.LogConverterService;
+using TestClient.ViewModels;
 
 namespace TestClient
 {
@@ -23,19 +25,29 @@ namespace TestClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+	    private ApplicationViewModel _vm;
 	    private LogFileRepository rep = new LogFileRepository();
-	    private ObservableCollection<LogFile> LogFiles => rep.Logs;
-	    private LogReader reader;
-		LogConverterService.ServiceClient LC = new LogConverterService.ServiceClient();
+        //private ObservableCollection<LogFile> LogFiles => rep.Logs;
+	    public ObservableCollection<LogFile> LogFils { get; } = new ObservableCollection<LogFile>();
+	    private LogParser _parser;
+		ServiceClient LC = new ServiceClient();
 		public MainWindow()
 		{
-		    LoadLogFiles();
 			InitializeComponent();
+		    _vm = new ApplicationViewModel();
+		    _vm.LogFileRep = rep; 
+		    this.DataContext = _vm;
+            //LoadLogFiles();
 		}
 
 	    private void LoadLogFiles()
 	    {
-	        rep.LoadLogFiles();
+	        LogFile l = new LogFile();
+	        l.Id = 1;
+	        LogFile l2 = new LogFile();
+	        l2.Id = 2;
+            LogFils.Add(l);
+            LogFils.Add(l2);
 	    }
 
 	    private void LoadLogReaders()
@@ -56,12 +68,14 @@ namespace TestClient
 
 
 			// Display OpenFileDialog by calling ShowDialog method 
-			Nullable<bool> result = dlg.ShowDialog();
+			bool? result = dlg.ShowDialog();
 
+		    TextBoxFilePath.Text = dlg.FileName;
 
-			// Get the selected file name and display in a TextBox 
-			if (result == true)
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
 			{
+			   
 				// Open document 
 				string filename = dlg.FileName;
 			   // _logFilePath = filename;
@@ -72,16 +86,16 @@ namespace TestClient
 
 		private void StartService_Click(object sender, RoutedEventArgs e)
 		{
-            //Initialize reader if it's null otherwise read
-           // reader = new LogReader(_logFilePath, FileLocation.Local);
+            //Initialize _parser if it's null otherwise read
+           // _parser = new LogParser(_logFilePath, FileLocation.Local);
 
             // 
           //  FilterLog();
 
-            //Initialize reader
+            //Initialize _parser
 		    try
 		    {
-		      //  LogReader r = 
+		      //  LogParser r = 
             }
 		    catch (Exception exception)
 		    {
@@ -111,13 +125,31 @@ namespace TestClient
             if (File.Exists(TextBoxFilePath.Text) && TextboxDescription.Text != string.Empty &&
                 TextBoxAlarmType.Text != string.Empty)
             {
-                LogFile logFile = new LogFile(TextBoxFilePath.Text, TextboxDescription.Text, TextBoxAlarmType.Text);
+                LogFile logFile = new LogFile(TextBoxFilePath.Text, FileLocationType.Local, TextboxDescription.Text, TextBoxAlarmType.Text);
                 rep.SaveLog(logFile);
                 MessageBox.Show("Successfully added logfile");
             }
             else
             {
                 MessageBox.Show("Couldn't add log");
+            }
+            
+        }
+
+        private void RemoveLogButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (listView_LogFiles.SelectedItem != null)
+                {
+                    LogFile f = (LogFile) listView_LogFiles.SelectedItem;
+                    if(f != null) rep.DeleteLogFile(f);
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+                throw;
             }
             
         }

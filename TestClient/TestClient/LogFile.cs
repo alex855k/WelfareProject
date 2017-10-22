@@ -8,10 +8,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TestClient.Helpers;
 
 namespace TestClient
 {
-    public class LogFile
+    public class LogFile : ObservableObject
     {
         private readonly char[] specialChars = { '\t', ';' };
         // Regex for finding date column.
@@ -25,7 +26,7 @@ namespace TestClient
                 "((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?)"
             ;
         private readonly Regex _dateRegex = new Regex(_dateRegexExp, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        public long ID { get; set; } 
+        public long Id { get; set; } 
         public string Description { get; set; }
         public string AlarmType { get; set; }
         public Object _logfileLock = new Object();
@@ -35,7 +36,7 @@ namespace TestClient
 
         private int _dateColumnIndex;
         public string[] LogData { get; set; } 
-        public char SeperationChar { get; set; } = '\t';
+        public char SeperationChar { get; set; } = ';';
         private string _fileDir = "LogFiles/";
         private string[] _dataFile;
         public string FileName { get; }
@@ -55,6 +56,8 @@ namespace TestClient
             AlarmType = alarmtype;
             FileLocation = fileLocation;
             FileLocationType = location;
+           if (SeperationChar == ' ') SeperationChar = FindSeperationChar(LogData);
+          // _dateColumnIndex = FindDateColumnIndex(LogData);
             GetAllLogData();
         }
 
@@ -80,7 +83,7 @@ namespace TestClient
             return -1;
         }
 
-        public char FindSeperationChar(string[] data)
+        private char FindSeperationChar(string[] data)
         {
             char seperationChar = ';';
             foreach (var specialC in specialChars)
@@ -97,9 +100,6 @@ namespace TestClient
         {
             // Split all lines of data into a string a array
             LogData = File.ReadAllLines(FileLocation, Encoding.GetEncoding("iso-8859-1"));
-            // seperation character is found here if it wasn't already located
-            if (SeperationChar == ' ') SeperationChar = FindSeperationChar(LogData);
-            _dateColumnIndex = (LogData);
         }
 
         /* public LogFile(string fileName,string url, FileLocationType location, string description, string alarmtype)
@@ -120,7 +120,33 @@ namespace TestClient
             FileLocationType = FileLocationType.Local;
         }
 
-        public List<string> GetNewLines()
+        public string[] GetInitialData(DateTime cutoffDateTime)
+        {
+            // If file location is still remote fetch a copy and store it locally and set the filepath
+            // MOVE THIS  if (FileLocationType == FileLocation.URI) CopyFileToLocalDirectory();
+
+            if (File.Exists(FileLocation))
+            {
+
+                // string array containing the needed strings to send over the network.
+                List<string> parseAbleData = new List<string>();
+
+                foreach (var line in LogData)
+                {
+                    // For every line of data split the data into columns
+                    string[] columns = line.Split(SeperationChar);
+                    // If date is before the cutoff date
+                    if (DateTime.Compare(Convert.ToDateTime(columns[_dateColumnIndex]), cutoffDateTime) > -1)
+                    {
+                        return parseAbleData.ToArray();
+                    }
+                    parseAbleData.Add(columns[_dateColumnIndex]);
+                }
+            }
+            throw new Exception("File not located!");
+        }
+
+        public string[] GetNewLines()
         {
             List<string> newLines= new List<string>();
             using (StreamReader sr = new StreamReader(_fileDir + FileName))
@@ -135,23 +161,30 @@ namespace TestClient
                     }
                     else
                     {
-                        newLines.Add(sr.ReadLine());
+                        var rl = sr.ReadLine();
+                        if (rl != null) newLines.Add(rl);
                     }
                 }
             }
-            return newLines;
+            return newLines.ToArray();
         }
 
 
         public string FormatSaveString(char sepC)
         {
             StringBuilder str = new StringBuilder();
-            str.Append(ID+ sepC);
-            str.Append(FileLocationType+ sepC);
-            str.Append(FileLocation+ sepC);
-            str.Append(SeperationChar+ sepC);
+            str.Append(Id);
+            str.Append(sepC);
+            str.Append(FileLocationType);
+            str.Append(sepC);
+            str.Append(FileLocation);
+            str.Append(sepC);
+            str.Append(SeperationChar);
+            str.Append(sepC);
             str.Append(HasHeader);
-            str.Append(sepC + Description + sepC);
+            str.Append(sepC);
+            str.Append(Description);
+            str.Append(sepC);
             str.Append(AlarmType);
             return str.ToString();
         }
